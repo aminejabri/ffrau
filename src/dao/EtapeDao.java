@@ -122,4 +122,31 @@ public class EtapeDao extends AbstractDao<Etape>{
 		}
 	}
 
+	public Etape findByEditionIdAndOrdre(int editionId, int ordre) {
+		
+		PreparedStatement stm;
+		try {
+			stm = connection.prepareStatement("SELECT * FROM etape where eta_edi_id = ? and eta_ordre = ?");
+			stm.setInt(1, editionId);
+			stm.setInt(2, ordre);
+			stm.execute();
+			ResultSet rs = stm.getResultSet();
+			
+			Etape results = null;
+			
+			while (rs.next()) {
+				
+				results = new Etape(rs.getInt(1), rs.getInt(3), rs.getDouble(4), rs.getString(5), 
+						DaoFactory.getSpecialDao().findAllByEtapeId(rs.getInt(3)));		
+			}
+			
+			return results;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

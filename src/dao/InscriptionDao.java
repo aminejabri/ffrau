@@ -118,7 +118,7 @@ public class InscriptionDao extends AbstractDao<Inscription>{
 		}
 	}
 
-	
+
 	public List<Inscription> findByEtat(EtatInscription etat) {
 		PreparedStatement stm;
 		try {
@@ -136,6 +136,34 @@ public class InscriptionDao extends AbstractDao<Inscription>{
 						DaoFactory.getVehiculeDao().find(rs.getInt(4)),
 						DaoFactory.getEditionRallyeDao().find(rs.getInt(5)),
 						etat));
+			}
+			
+			return results;
+			
+		} catch (SQLException e) {		
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<Inscription> findByEdition(int editionId) {
+		PreparedStatement stm;
+		try {
+			stm = connection.prepareStatement("SELECT * FROM inscription where ins_edi_ral_id = ?");
+			stm.setInt(1, editionId);
+			stm.execute();
+			ResultSet rs = stm.getResultSet();
+			
+			List<Inscription> results = new ArrayList<>();
+					
+			while (rs.next()) {
+				
+				results.add(new Inscription(rs.getInt(1),
+						DaoFactory.getCoureurDao().find(rs.getInt(3)), 
+						DaoFactory.getVehiculeDao().find(rs.getInt(4)),
+						DaoFactory.getEditionRallyeDao().find(rs.getInt(5)),
+						EtatInscription.valueOf(rs.getString(5))));
 			}
 			
 			return results;

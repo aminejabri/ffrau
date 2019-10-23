@@ -115,4 +115,30 @@ public class SpecialeDao extends AbstractDao<Speciale>{
 	}
 
 
+	public Speciale findByEtapeIdAndOrdre(int etapeId, int ordre) {
+		
+		PreparedStatement stm;
+		try {
+			stm = connection.prepareStatement("SELECT * FROM speciale where spe_eta_id = ? and spe_ordrespe = ?");
+			stm.setInt(1, etapeId);
+			stm.setInt(2, ordre);
+			stm.execute();
+			ResultSet rs = stm.getResultSet();
+			Speciale result = null;
+			
+			while (rs.next()) {
+				
+				result = new Speciale(rs.getInt(1), rs.getInt(2), rs.getDouble(4), rs.getDouble(5));		
+			}
+			
+			return result;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 }
