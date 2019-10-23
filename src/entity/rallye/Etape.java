@@ -32,6 +32,7 @@ public class Etape {
 		this.distance = distance;
 		this.niveau = n;
 		this.speciales = new ArrayList<Speciale>();
+		this.edition =  edition;
 	}
 
 	public Etape(int id, int ordre, Double distance, String niveau, EditionRallye edition) {
@@ -58,6 +59,10 @@ public class Etape {
 		this.distance = distance;
 		this.niveau = niveau;
 		this.speciales = speciales;
+	}
+
+	public Etape(int ordre, double doubleValue, String string, int editionId) {
+
 	}
 
 	public int getOrdreE() {

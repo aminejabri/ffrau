@@ -140,5 +140,24 @@ public class SpecialeDao extends AbstractDao<Speciale>{
 		}
 	}
 
+	public Speciale save(Speciale obj) {
+		try {
+			PreparedStatement stm = connection.prepareStatement("insert into speciale(spe_ordrespe, spe_eta_id, spe_distancespe, spe_chronometrage) values(?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, obj.getOrdreS());
+			stm.setInt(2, obj.getEtape().getId());
+			stm.setDouble(3, obj.getDistance());
+			stm.setDouble(4, obj.getChonometrage());
+
+			stm.execute();
+			ResultSet rs = stm.getGeneratedKeys();
+			if(rs.next())
+				obj.setId(rs.getInt(1));
+			return obj;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }

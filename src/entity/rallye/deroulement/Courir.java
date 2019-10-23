@@ -10,8 +10,6 @@ public class Courir {
 	private Speciale speciale;
 	private Double temps;
 	
-	
-	
 	public Courir(Coureur coureur, Speciale speciale, Double temps) {
 		super();
 		this.coureur = coureur;

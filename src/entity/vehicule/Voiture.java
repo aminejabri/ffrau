@@ -32,7 +32,7 @@ public class Voiture  extends Vehicule{
 		}  else if (puissance >= 300)
 			return Double.valueOf( 1 + 0.05 * (puissance - 300));
 		else 
-			return Double.valueOf( 1 + 0.05 * (puissance - 280));
+			return Double.valueOf( 1 + 0.05 * (puissance - 2));
 	}
 
 }

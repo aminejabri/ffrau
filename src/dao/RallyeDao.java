@@ -33,6 +33,23 @@ public class RallyeDao extends AbstractDao<Rallye> {
 		}
 	}
 
+	public Rallye save(Rallye obj) {
+		try {
+			PreparedStatement stm = connection.prepareStatement("insert into rallye(ral_nom, ral_ville, ral_pays) values(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setString(1, obj.getNom());
+			stm.setString(2, obj.getVille());
+			stm.setString(3, obj.getPays());
+			stm.execute();
+			ResultSet rs = stm.getGeneratedKeys();
+			if(rs.next())
+				obj.setId(rs.getInt(1));
+			return obj;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	@Override
 	public boolean delete(Rallye obj) {
 		try {
@@ -83,7 +100,7 @@ public class RallyeDao extends AbstractDao<Rallye> {
 				
 				return null;
 			} else {
-				return new Rallye(nom, ville, pays, DaoFactory.getEditionRallyeDao().findAllByRallyId(idRallye));
+				return new Rallye(id, nom, ville, pays, DaoFactory.getEditionRallyeDao().findAllByRallyId(idRallye));
 			}
 			
 		} catch (SQLException e) {

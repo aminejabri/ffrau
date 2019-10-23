@@ -1,6 +1,8 @@
 package utils;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import entity.utilisateur.Role;
@@ -56,7 +58,23 @@ public class ScanUtils {
 		
 		return result;
 	}
+
+	public static Date  scanDate() {
+	    
+		
+		System.out.println("jour : ");
+		int jour = scanInt(1, 31, false);
+		
+		System.out.println("mois : ");
+		int mois = scanInt(1, 12, false);
+
+		System.out.println("annee : ");
+		int annee = scanInt(1970, 2100, false);
+
 	
+	    return new GregorianCalendar(annee, mois, jour).getTime();
+	}
+
 	public static int scanInt(int min, int max, boolean vide) {
 	    
 	    boolean correctInput = false;

@@ -1,23 +1,42 @@
 package entity.declarations;
 
-import java.util.Date;
+import entity.rallye.Speciale;
+import entity.utilisateur.Coureur;
 
 public abstract class Declaration {
 	
-	private Date heureD;
-
+	Coureur coureur;
+	Speciale speciale;
+	TypeDeclaration type;
 	
-	public  Declaration(Date heureD) {
-		this.heureD = heureD;
+	
+	
+	public Declaration(Coureur coureur, Speciale speciale, TypeDeclaration type) {
+		super();
+		this.coureur = coureur;
+		this.speciale = speciale;
+		this.type = type;
 	}
-
-	public Date getHeureD() {
-		return heureD;
+	
+	public Coureur getCoureur() {
+		return coureur;
 	}
-
-	public void setHeureD(Date heureD) {
-		this.heureD = heureD;
+	public void setCoureur(Coureur coureur) {
+		this.coureur = coureur;
 	}
+	public Speciale getSpeciale() {
+		return speciale;
+	}
+	public void setSpeciale(Speciale speciale) {
+		this.speciale = speciale;
+	}
+	public TypeDeclaration getType() {
+		return type;
+	}
+	public void setType(TypeDeclaration type) {
+		this.type = type;
+	}
+	
 	
 	
 }

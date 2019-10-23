@@ -1,11 +1,12 @@
 package entity.declarations;
 
-import java.util.Date;
+import entity.rallye.Speciale;
+import entity.utilisateur.Coureur;
 
 public class Retour extends Declaration {
 
-	public Retour(Date heureD) {
-			
-		super(heureD);
+	public Retour(Coureur coureur, Speciale speciale) {
+		super(coureur, speciale, TypeDeclaration.Retour);
+		// TODO Auto-generated constructor stub
 	}
 }

@@ -1,4 +1,4 @@
-package entity.rallye.deroulement;
+package entity.declarations;
 
 public enum TypeDeclaration {
 

@@ -80,6 +80,14 @@ public class Speciale {
 		this.lstD = new HashMap<Coureur, ArrayList<Declaration>>();
 	}
 	
+	public Speciale(int ordre, Double distance, Double chonometrage, Etape etape) {
+		this.ordre = ordre;
+		this.distance = distance;
+		this.chonometrage = chonometrage;
+		this.etape = etape;
+
+	}
+	
 	public Speciale(int id, int ordre, Double distance, Double chonometrage) {
 	
 		this.id = id;
@@ -102,7 +110,7 @@ public class Speciale {
 		this.lstD = new HashMap<Coureur, ArrayList<Declaration>>();
 	}
 
-	//pour récupérer infos concernant une speciale
+	//pour rï¿½cupï¿½rer infos concernant une speciale
 	public int getOrdreS() {
 		return ordre;
 	}
@@ -110,7 +118,7 @@ public class Speciale {
 	public Double getChonometrage() {
 		return chonometrage;
 	}
-	//pour modifier infos concernant une rallye --> UML Mise à jour edition rallye
+	//pour modifier infos concernant une rallye --> UML Mise ï¿½ jour edition rallye
 	public void setOrdreS(int ordreS) {
 		this.ordre = ordreS;
 	}
@@ -121,16 +129,16 @@ public class Speciale {
 		this.chonometrage = chonometrage;
 	}
 	
-	//enregistrer le temps utilisé par un coureur à une spéciale
+	//enregistrer le temps utilisï¿½ par un coureur ï¿½ une spï¿½ciale
 	public void enregistrerTemps(Coureur coureur, Double temps) {
 		this.lstTemps.put(coureur, temps);
 	}
-	//récupérer le temps utilisé par un coureur à une spéciale
+	//rï¿½cupï¿½rer le temps utilisï¿½ par un coureur ï¿½ une spï¿½ciale
 	public Double recupererTempsParCoureur(Coureur coureur) {
 		return this.lstTemps.get(coureur);
 	}
 	
-	//ajouter une déclaration pour un coureur à une spéciale
+	//ajouter une dï¿½claration pour un coureur ï¿½ une spï¿½ciale
 	public void ajouterDeclaration(Coureur c, Declaration d) {
 		if(this.lstD.containsKey(c)) {
 			lstDc.add(d);
@@ -140,7 +148,7 @@ public class Speciale {
 			this.lstD.get(c).add(d);
 		}
 	}
-	//récupérer les déclarations par un coureur à une spéciale
+	//rï¿½cupï¿½rer les dï¿½clarations par un coureur ï¿½ une spï¿½ciale
 	public List<Declaration> recupererDeclarations(Coureur c) {
 		return this.lstD.get(c);
 	}

@@ -149,4 +149,25 @@ public class EtapeDao extends AbstractDao<Etape>{
 		}
 	}
 
+	public Etape save(Etape obj) {
+		try {
+			PreparedStatement stm = connection.prepareStatement("insert into etape(eta_edi_id, eta_ordre, eta_distance, eta_niveau) values(?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, obj.getEdition().getNumEdition());
+			stm.setInt(2, obj.getOrdreE());
+			stm.setDouble(3, obj.getDistanceE());
+			stm.setString(4, obj.getNiveau());
+			
+			stm.execute();
+			ResultSet rs = stm.getGeneratedKeys();
+			
+			if(rs.next())
+				obj.setId(rs.getInt(1)); 
+			
+			return obj;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+
 }

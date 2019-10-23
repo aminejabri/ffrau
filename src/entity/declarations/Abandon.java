@@ -1,12 +1,14 @@
 package entity.declarations;
 
-import java.util.Date;
+
+import entity.rallye.Speciale;
+import entity.utilisateur.Coureur;
 
 public class Abandon extends Declaration {
 
-	public Abandon(Date heureD) {
-		super(heureD);
-		
+	public Abandon(Coureur coureur, Speciale speciale) {
+		super(coureur, speciale, TypeDeclaration.Abandon);
+		// TODO Auto-generated constructor stub
 	}
 
 }

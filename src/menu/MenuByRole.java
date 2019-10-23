@@ -3,7 +3,8 @@ package menu;
 public class MenuByRole {
 
 	public static void agenceMenu() {
-		
+	
+		AgenceMenu.menu();
 	}
 
 	public static void coureurMenu(){

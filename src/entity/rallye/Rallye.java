@@ -39,6 +39,14 @@ public class Rallye {
 		this.pays = pays;
 		this.lstEditions = lstEditions;
 	}
+	
+	public Rallye(int id, String nom, String ville, String pays, List<EditionRallye> lstEditions) {
+		this.id = id;
+		this.nom = nom;
+		this.ville = ville;
+		this.pays = pays;
+		this.lstEditions = lstEditions;
+	}
 
    	//organiser une nouvelle �dition de rallye
 	public void ajouterEditionR(EditionRallye e) {
