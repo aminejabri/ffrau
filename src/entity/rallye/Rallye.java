@@ -26,6 +26,13 @@ public class Rallye {
 		this.lstEditions = new ArrayList<EditionRallye>();
 	}
 	
+
+	public Rallye(int id, String nom, String ville, String pays) {
+		this.id = id;
+		this.nom = nom;
+		this.ville = ville;
+		this.pays = pays;
+	}
 	public Rallye(String nom, String ville, String pays, List<EditionRallye> lstEditions) {
 		this.nom = nom;
 		this.ville = ville;
@@ -33,12 +40,12 @@ public class Rallye {
 		this.lstEditions = lstEditions;
 	}
 
-   	//organiser une nouvelle édition de rallye
+   	//organiser une nouvelle ï¿½dition de rallye
 	public void ajouterEditionR(EditionRallye e) {
 		this.lstEditions.add(e);
 	}
 	
-	//récupérer une édition si numEdition, rallye donnée
+	//rï¿½cupï¿½rer une ï¿½dition si numEdition, rallye donnï¿½e
 	public EditionRallye recupererEdition(int numEdition) {
 
 			return lstEditions.stream().filter(x-> x.getNumEdition() == numEdition).findFirst().get();
