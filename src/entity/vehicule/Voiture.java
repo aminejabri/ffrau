@@ -25,9 +25,14 @@ public class Voiture  extends Vehicule{
 	}
 
 	@Override
-	float calculerCoeff() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Double calculerCoeff() {
+
+		if( 280 <= puissance && puissance <= 300) {
+			return 1.;
+		}  else if (puissance >= 300)
+			return Double.valueOf( 1 + 0.05 * (puissance - 300));
+		else 
+			return Double.valueOf( 1 + 0.05 * (puissance - 280));
 	}
 
 }

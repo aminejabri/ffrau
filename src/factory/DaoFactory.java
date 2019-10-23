@@ -2,6 +2,7 @@ package factory;
 
 import dao.ConstructeurDao;
 import dao.CoureurDao;
+import dao.CourirDao;
 import dao.EditionRallyeDao;
 import dao.EtapeDao;
 import dao.InscriptionDao;
@@ -23,14 +24,26 @@ public class DaoFactory {
 	static CoureurDao coureurDao;
 	static InscriptionDao inscriptionDao;
 	static ConstructeurDao constructeurDao;
+	static CourirDao courirDao;
 	
-	public static ConstructeurDao getConstructeurDao() {
+	public static CourirDao getCourirDao() {
 		
-		if (constructeurDao == null) {
-			constructeurDao = new ConstructeurDao(FrauConnection.getInstance());
+		if (courirDao == null) {
+			courirDao = new CourirDao(FrauConnection.getInstance());
 		}
 		
-		return constructeurDao;
+		return courirDao;
+		
+	}
+	
+		
+		public static ConstructeurDao getConstructeurDao() {
+			
+			if (constructeurDao == null) {
+				constructeurDao = new ConstructeurDao(FrauConnection.getInstance());
+			}
+			
+			return constructeurDao;
 	}
 
 	public static RallyeDao getRallyeDao() {

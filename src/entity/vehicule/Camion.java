@@ -27,9 +27,15 @@ public class Camion extends Vehicule {
 
 
 	@Override
-	float calculerCoeff() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Double calculerCoeff() {
+		
+		if(  2000 == poid ) {
+			return 1.;
+		}  else if (poid >= 2000)
+			return Double.valueOf( 1 - 0.1 * (int) ((poid - 2000)/100));
+		else 
+			return Double.valueOf( 1 - 0.1 * (int) ((poid - 2000)/100));
+
 	}
 
 }

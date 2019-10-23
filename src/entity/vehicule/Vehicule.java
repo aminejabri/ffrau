@@ -44,7 +44,7 @@ public abstract class Vehicule {
 		this.immatriculation = immatriculation;
 	}
 
-	abstract float calculerCoeff();
+	public abstract Double calculerCoeff();
 
 	public int getId() {
 		return id;
@@ -66,6 +66,7 @@ public abstract class Vehicule {
 		return "Vehicule [immatriculation=" + immatriculation + ", constructeur=" + constructeur.getNom() + ", type=" + type
 				+ "]";
 	}
+	
 	
 	
 }

@@ -27,9 +27,14 @@ public class Moto extends Vehicule{
 
 
 	@Override
-	float calculerCoeff() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Double calculerCoeff() {
+		
+		if( 500 <= cylindree && cylindree <= 525) {
+			return 1.;
+		}  else if (cylindree >= 525)
+			return Double.valueOf( 1 - 0.25 * (int) ((cylindree - 525)/25));
+		else 
+			return Double.valueOf( 1 - 0.25 * (int) ((cylindree - 500)/25));
 	}
 
 }

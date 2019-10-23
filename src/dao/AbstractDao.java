@@ -13,7 +13,7 @@ public abstract class AbstractDao<T> {
 	    this.connection = connection;
 	  }
 	   
-	  public abstract boolean create(T obj) throws SQLIntegrityConstraintViolationException;
+	  public abstract boolean create(T obj) throws Exception;
 
 	  public abstract boolean delete(T obj);
 

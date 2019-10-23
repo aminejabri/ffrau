@@ -132,4 +132,47 @@ public class VehiculeDao extends AbstractDao<Vehicule>{
 			return null;
 		}
 	}
+
+	public Vehicule findByEditionAndCoureurId(int idEdition, int idCoureur) {
+		PreparedStatement stm;
+		try {
+			stm = connection.prepareStatement("SELECT * FROM vehicule v inner join inscription i on i.ins_veh_id = v.id where i.ins_edi_ral_id = ? and ins_cour_id = ?");
+			stm.setInt(1, idEdition);   //? commence par 1
+			stm.setInt(2, idCoureur);   //? commence par 1
+			stm.execute();
+			ResultSet rs = stm.getResultSet();
+			
+			Constructeur con = null;
+			String immat = "";
+			String type = "";
+			float puissance = 0;
+			float poid = 0;
+			float cylindre = 0;
+			int id = 0;
+			
+			while (rs.next()) {
+				
+				id = rs.getInt(1);
+				con = DaoFactory.getConstructeurDao().find(rs.getInt(2));  
+				immat = rs.getString(3);
+				type = rs.getString(4);
+				puissance = rs.getFloat(5);
+				poid = rs.getFloat(6);
+				cylindre = rs.getFloat(7);
+			}
+			if(type == TypeVehicule.VOITURE.name()) {
+				return new Voiture(id, immat, con, puissance);
+			}
+			else if(type == TypeVehicule.CAMION.name()) {
+				return new Camion(id, immat, con, poid);
+			}
+			else {
+				return new Moto(id, immat, con, cylindre);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

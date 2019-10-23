@@ -21,17 +21,13 @@ public class CourirDao extends AbstractDao<Courir>{
 	}
 
 	@Override
-	public boolean create(Courir obj) throws SQLIntegrityConstraintViolationException {
-		try {
+	public boolean create(Courir obj) throws SQLException {
 			PreparedStatement stm = connection.prepareStatement("insert into courir ( couri_cour_id, couri_spe_id, couri_tmp_id) values(?,?,?)");
 			stm.setInt(1, obj.getCoureur().getId());
 			stm.setInt(2, obj.getSpeciale().getId());
 			stm.setDouble(3, obj.getTemps());
+			
 			return stm.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	@Override
