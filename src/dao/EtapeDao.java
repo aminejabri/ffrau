@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import entity.rallye.EditionRallye;
 import entity.rallye.Etape;
 import entity.rallye.Rallye;
+import entity.utilisateur.Coureur;
 import factory.DaoFactory;
 
 public class EtapeDao extends AbstractDao<Etape>{
@@ -164,6 +167,37 @@ public class EtapeDao extends AbstractDao<Etape>{
 				obj.setId(rs.getInt(1)); 
 			
 			return obj;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	public Map<Integer, Coureur> recuperClassementEtape(Etape obj) {
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT c.couri_cour_id, ");
+			sb.append("       Sum(c.couri_tmp_id) AS tempsParEdition  ");
+			sb.append("FROM   speciale s,  ");
+			sb.append("       etape e,  ");
+			sb.append("       courir c  ");
+			sb.append("WHERE  s.spe_eta_id = e.id  ");
+			sb.append("       AND s.id = c.couri_spe_id ");
+			sb.append("and e.id = ? ");
+			sb.append("GROUP  BY c.couri_cour_id  ");
+			sb.append("ORDER  BY 2 ASC ");
+
+			PreparedStatement stm = connection.prepareStatement(sb.toString());
+			stm.setInt(1, obj.getId());
+			
+			stm.execute();
+			ResultSet rs  = stm.getResultSet();
+			
+			Map<Integer, Coureur> resultats = new HashMap<>();
+			while(rs.next())
+				resultats.put(rs.getRow(), DaoFactory.getCoureurDao().find(rs.getInt(1)));
+			
+			return resultats;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

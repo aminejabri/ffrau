@@ -8,11 +8,22 @@ public abstract class Declaration {
 	Coureur coureur;
 	Speciale speciale;
 	TypeDeclaration type;
+	private int id;
 	
 	
 	
 	public Declaration(Coureur coureur, Speciale speciale, TypeDeclaration type) {
 		super();
+		this.coureur = coureur;
+		this.speciale = speciale;
+		this.type = type;
+	}
+	
+	
+	
+	public Declaration(int id, Coureur coureur, Speciale speciale, TypeDeclaration type) {
+		super();
+		this.id = id;
 		this.coureur = coureur;
 		this.speciale = speciale;
 		this.type = type;
@@ -36,6 +47,19 @@ public abstract class Declaration {
 	public void setType(TypeDeclaration type) {
 		this.type = type;
 	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 	
 	

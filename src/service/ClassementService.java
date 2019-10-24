@@ -10,6 +10,7 @@ import entity.vehicule.Moto;
 import entity.vehicule.TypeVehicule;
 import entity.vehicule.Vehicule;
 import entity.vehicule.Voiture;
+import factory.DaoFactory;
 
 public class ClassementService {
 
@@ -19,7 +20,7 @@ public class ClassementService {
 
 	public Map <Integer, Coureur> recupererClassementEtape(Etape etape) {
 		
-		return null;
+		return DaoFactory.getEtapeDao().recuperClassementEtape(etape);
 	}
 	
 	public Map <Integer, Coureur> recupererClassementEdition(EditionRallye edition) {

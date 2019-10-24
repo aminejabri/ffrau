@@ -9,4 +9,9 @@ public class Retour extends Declaration {
 		super(coureur, speciale, TypeDeclaration.Retour);
 		// TODO Auto-generated constructor stub
 	}
+
+	public Retour(int id, Coureur coureur, Speciale speciale) {
+		super(id, coureur, speciale, TypeDeclaration.Retour);
+		// TODO Auto-generated constructor stub
+	}
 }

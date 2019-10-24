@@ -6,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import entity.rallye.*;
+import entity.utilisateur.Coureur;
 import factory.DaoFactory;
 import factory.ServiceFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ConsultationClassementMenu {
 	public static void main(String[] args) {
@@ -41,7 +44,7 @@ public class ConsultationClassementMenu {
 		
 		System.out.println("Veuillez num rallye ");
 		
-		for(int i = 0; i< 10; i++) {
+		for(int i = 0; i< rallyes.size(); i++) {
 			System.out.println( rallyes.get(i).getNom() + " / ( "+ (i + 1)+ ")");
 		}
 		
@@ -51,7 +54,7 @@ public class ConsultationClassementMenu {
 	    int idR = ScanUtils.scanInt(1, rallyes.size(), false);
 	             
 	    
-	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(idR);
+	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(rallyes.get(idR-1).getId());
 	    
 	   
 	    for (int i=0 ; i <lstEdition.size(); i ++) {
@@ -78,7 +81,12 @@ public class ConsultationClassementMenu {
 
 		Etape etape = DaoFactory.getEtapeDao().findByEditionIdAndOrdre(edition.getNumEdition(), ordre);
 		
-		ServiceFactory.getClassementService().recupererClassementEtape(etape);
+		Map<Integer, Coureur> resultats = ServiceFactory.getClassementService().recupererClassementEtape(etape); 
+		
+		for(Entry<Integer, Coureur> result : resultats.entrySet()) {
+			
+			System.out.println(result.getKey() + " : " + result.getValue().getNom() + " " + result.getValue().getPrenom());
+		}
 		
 	}
 	

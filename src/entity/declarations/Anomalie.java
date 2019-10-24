@@ -10,8 +10,14 @@ public class Anomalie extends Declaration{
 	protected	String description;
 	
 
+	public Anomalie(int id, Coureur coureur, Speciale speciale, String description) {
+		super(id, coureur, speciale, TypeDeclaration.Anomalie);
+		
+		this.description = description;
+	}
+
 	public Anomalie(Coureur coureur, Speciale speciale, String description) {
-		super(coureur, speciale, TypeDeclaration.Anomalie);
+		super( coureur, speciale, TypeDeclaration.Anomalie);
 		
 		this.description = description;
 	}

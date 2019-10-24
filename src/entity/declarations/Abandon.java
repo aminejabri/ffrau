@@ -10,5 +10,10 @@ public class Abandon extends Declaration {
 		super(coureur, speciale, TypeDeclaration.Abandon);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Abandon(int id, Coureur coureur, Speciale speciale) {
+		super(id, coureur, speciale, TypeDeclaration.Abandon);
+		// TODO Auto-generated constructor stub
+	}
 
 }

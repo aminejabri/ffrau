@@ -70,7 +70,7 @@ public class ConstructeurDao extends AbstractDao<Constructeur>{
 				
 				idConst = rs.getInt(1);
 				nom = rs.getString(2);
-				addresse = rs.getString(5);
+				addresse = rs.getString(4);
 				pays = rs.getString(5);
 				user = DaoFactory.getUtilisateurDao().find(rs.getInt(3));
 			}

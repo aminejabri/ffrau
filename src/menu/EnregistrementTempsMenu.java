@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import entity.declarations.Declaration;
+import entity.declarations.TypeDeclaration;
 import entity.inscription.Inscription;
 import entity.rallye.EditionRallye;
 import entity.rallye.Etape;
@@ -119,12 +121,25 @@ public class EnregistrementTempsMenu extends Menu{
 			    	System.out.println("saisir temps ");
 			    	Coureur coureurChoisi = coureurs.get(numCoureurChoisi - 1);
 			    	int  tempssaisie = ScanUtils.scanInt(1, speciale.getChonometrage().intValue(), false);
-			  
+			    	
+			    	int tempsMajoration = 0;
+			    	
+			    	List<Declaration> declarations = DaoFactory.getDeclarationDao().findByEditionAndCoureur(speciale.getId(), coureurChoisi.getId());
+			    	if(declarations.stream().anyMatch(x-> TypeDeclaration.Retour.name().equalsIgnoreCase(x.getType().name()))
+			    			&&
+			    			declarations.stream().anyMatch(x-> TypeDeclaration.Abandon.name().equalsIgnoreCase(x.getType().name()))) {
+			    		if (lstSpecial.size() == speciale.getOrdre()) {
+			    			tempsMajoration = 10;
+			    		} else if (lstSpecial.size() > speciale.getOrdre()) {
+			    			tempsMajoration  = 5;
+			    		}
+			    	}
+			    	
 			    	try {
 				
 			    		Vehicule vehicule = DaoFactory.getVehiculeDao().findByEditionAndCoureurId(edition.getNumEdition(), coureurChoisi.getId());
-			    		DaoFactory.getCourirDao().create(new Courir(coureurChoisi, speciale, 
-			    				tempssaisie * vehicule.calculerCoeff())); // ajouter retour ici si retour alors + 10
+			    		DaoFactory.getCourirDao().create(new Courir(coureurChoisi, speciale, tempsMajoration + 
+			    				tempssaisie * vehicule.calculerCoeff())); 
 			    		coureurs.remove(coureurChoisi);
 				
 					} catch (SQLException e) {

@@ -23,11 +23,11 @@ import utils.ScanUtils;
 
 public class EnregistrementDeclarationMenu extends Menu{
 
-	public static void main(String[] args){
+	public static void menu(){
 
 		List<Rallye> rallyes = DaoFactory.getRallyeDao().findAll();
 		
-		for(int i = 0; i< 10; i++) {
+		for(int i = 0; i< rallyes.size(); i++) {
 			System.out.println( rallyes.get(i).getNom() + " / ( "+ (i + 1)+ ")");
 		}
 		
@@ -35,9 +35,9 @@ public class EnregistrementDeclarationMenu extends Menu{
 	    System.out.println(" " );
 	    
 	    int idR = ScanUtils.scanInt(1, rallyes.size(), false);
-	             
 	    
-	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(idR);
+	    
+	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(rallyes.get(idR -1).getId());
 	    
 	   
 	    for (int i=0 ; i <lstEdition.size(); i ++) {
@@ -91,14 +91,13 @@ public class EnregistrementDeclarationMenu extends Menu{
 	    
 	    
 	    
-	    System.out.println("Veuillez enregistrer temps des coureur : Choisir coureur (1) / fin (2) ");
+	    System.out.println(" Choisir coureur (1) / fin (2) ");
 	    int coureurOuFin = ScanUtils.scanInt(1, 2, false);
 	   
-	    while (coureurOuFin == 1 && coureurs.size() > 0) {
+	    while (coureurOuFin == 1 ) {
 		
 		    System.out.println("Choisir numero coureur ");
 	    	int numCoureurChoisi = ScanUtils.scanInt(1, coureurs.size(), false);
-	    	System.out.println("saisir temps ");
 	    	Coureur coureurChoisi = coureurs.get(numCoureurChoisi - 1);
 	    	
 		    System.out.println("Veuillez selectionner le type de declaration : Abandon (1) / Retour(2) / Anomalie(3)");
@@ -125,14 +124,15 @@ public class EnregistrementDeclarationMenu extends Menu{
 	    		
 		
 			} catch ( Exception e) {
-				if(e instanceof SQLIntegrityConstraintViolationException)
-					System.out.println("temps deja saisie");
 
-				else 
+				if (e instanceof SQLIntegrityConstraintViolationException)
+				{
+					System.out.println("declaration deja inscrite");
+				} else
 					System.out.println("Problème veuillez essayer plus tard");
 			}
 	    	
-		    System.out.println("Veuillez enregistrer temps des coureur : Choisir coureur (1) / fin (2) ");
+		    System.out.println("Choisir coureur (1) / fin (2) ");
 		    coureurOuFin = ScanUtils.scanInt(1, 2, false);
 		    
 		    if (coureurOuFin == 1) {
@@ -144,6 +144,7 @@ public class EnregistrementDeclarationMenu extends Menu{
 		    }
 		    
 	    }
+	    CommissaireMenu.menu();
 	    
 	    	
 	    
