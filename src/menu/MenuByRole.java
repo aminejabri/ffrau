@@ -25,7 +25,7 @@ public class MenuByRole {
 	}
 	
 	public static void juryMenu(){
-		//JuryMenu.menu();
+		JuryMenu.menu();
 	}
 
 }

@@ -25,7 +25,7 @@ public class ClassementService {
 	
 	public Map <Integer, Coureur> recupererClassementEdition(EditionRallye edition) {
 		
-		return null;
+		return DaoFactory.getEditionRallyeDao().recuperClassementEtape(edition);
 	}
 	
 }

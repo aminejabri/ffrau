@@ -177,12 +177,12 @@ public class EtapeDao extends AbstractDao<Etape>{
 		try {
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT c.couri_cour_id, ");
-			sb.append("       Sum(c.couri_tmp_id) AS tempsParEdition  ");
+			sb.append("Sum(c.couri_tmp_id) AS tempsParEdition  ");
 			sb.append("FROM   speciale s,  ");
-			sb.append("       etape e,  ");
-			sb.append("       courir c  ");
+			sb.append("etape e,  ");
+			sb.append("courir c  ");
 			sb.append("WHERE  s.spe_eta_id = e.id  ");
-			sb.append("       AND s.id = c.couri_spe_id ");
+			sb.append("AND s.id = c.couri_spe_id ");
 			sb.append("and e.id = ? ");
 			sb.append("GROUP  BY c.couri_cour_id  ");
 			sb.append("ORDER  BY 2 ASC ");

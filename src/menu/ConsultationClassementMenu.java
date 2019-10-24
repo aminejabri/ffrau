@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ConsultationClassementMenu {
-	public static void main(String[] args) {
+	public static void menu() {
 
         System.out.println("classement par etape (1) / classement par édition (2)");
 
@@ -98,7 +98,7 @@ public class ConsultationClassementMenu {
 		
 		System.out.println("Veuillez num rallye ");
 
-		for(int i = 0; i< 10; i++) {
+		for(int i = 0; i< rallyes.size(); i++) {
 			System.out.println( rallyes.get(i).getNom() + " / ( "+ (i + 1)+ ")");
 		}
 		
@@ -108,7 +108,7 @@ public class ConsultationClassementMenu {
 	    int idR = ScanUtils.scanInt(1, rallyes.size(), false);
 	             
 	    
-	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(idR);
+	    List<EditionRallye> lstEdition = DaoFactory.getEditionRallyeDao().findAllByRallyId(rallyes.get(idR - 1).getId());
 	    
 	   
 	    for (int i=0 ; i <lstEdition.size(); i ++) {
@@ -123,6 +123,14 @@ public class ConsultationClassementMenu {
 		EditionRallye edition = lstEdition.get(numEdi - 1);
 		
 		ServiceFactory.getClassementService().recupererClassementEdition(edition);
+		
+		Map<Integer, Coureur> resultats = ServiceFactory.getClassementService().recupererClassementEdition(edition); 
+		
+		for(Entry<Integer, Coureur> result : resultats.entrySet()) {
+			
+			System.out.println(result.getKey() + " : " + result.getValue().getNom() + " " + result.getValue().getPrenom());
+		}
+		
 		
 	}
 }
