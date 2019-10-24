@@ -27,6 +27,17 @@ public class Coureur {
 		this.rhesus = rhesus;
 	}
 
+	public Coureur( Utilisateur utilisateur, String nom, String prenom, Date dtNais, String groupeSang,
+			String rhesus) {
+		super();
+		this.utilisateur = utilisateur;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dtNais = dtNais;
+		this.groupeSang = groupeSang;
+		this.rhesus = rhesus;
+	}
+
 	public void setDtNais(Date dtNais) {
 		this.dtNais = dtNais;
 	}

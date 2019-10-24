@@ -22,7 +22,22 @@ public class InscriptionDao extends AbstractDao<Inscription>{
 
 	@Override
 	public boolean create(Inscription obj) {
-		return false;
+		try {
+			PreparedStatement stm = connection.prepareStatement(
+					"insert into  inscription (ins_num, ins_etat ,ins_cour_id , ins_veh_id , ins_edi_ral_id)"
+					+ " values(? * 1000 + ? * 100 +  ? * 10 ,?,?,?,?)");
+			stm.setInt(1, obj.getCoureur().getId());
+			stm.setInt(2, obj.getVehicule().getId());
+			stm.setInt(3, obj.getEditionRallye().getNumEdition());
+			stm.setString(4, obj.getEtat().name());
+			stm.setInt(5, obj.getCoureur().getId());
+			stm.setInt(6, obj.getVehicule().getId());
+			stm.setInt(7, obj.getEditionRallye().getNumEdition());
+			return stm.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
@@ -174,5 +189,29 @@ public class InscriptionDao extends AbstractDao<Inscription>{
 			return null;
 		}
 	}
+	
+	public Inscription save(Inscription obj) {
+		try {
+			PreparedStatement stm = connection.prepareStatement(
+					"insert into  inscription (ins_num, ins_etat ,ins_cour_id , ins_veh_id , ins_edi_ral_id)"
+					+ " values(? * 1000 + ? * 100 +  ? * 10 ,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, obj.getCoureur().getId());
+			stm.setInt(2, obj.getVehicule().getId());
+			stm.setInt(3, obj.getEditionRallye().getNumEdition());
+			stm.setString(4, obj.getEtat().name());
+			stm.setInt(5, obj.getCoureur().getId());
+			stm.setInt(6, obj.getVehicule().getId());
+			stm.setInt(7, obj.getEditionRallye().getNumEdition());
+			stm.execute();
+			obj.setNumero(find(obj.getCoureur().getId(), obj.getEditionRallye().getNumEdition()).getNumero());
+			if (obj.getNumero() != 0) {
+				return obj;
+			} else return null;
+					} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }

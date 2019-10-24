@@ -17,6 +17,12 @@ public class Moto extends Vehicule{
 	}
 
 	
+	public Moto( String immatriculation, Constructeur con, float cylindree) {
+		super(    immatriculation,   con, TypeVehicule.MOTO);
+		this.cylindree = cylindree;
+	}
+
+	
 	public float getCylindree() {
 		return cylindree;
 	}

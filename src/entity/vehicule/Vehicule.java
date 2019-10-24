@@ -35,6 +35,15 @@ public abstract class Vehicule {
 		this.type = type;
 	}
 
+
+	public Vehicule( String immatriculation, Constructeur con, TypeVehicule type) {
+		
+		this.id = id;
+		this.immatriculation = immatriculation;
+		this.constructeur = con;
+		this.type = type;
+	}
+
 	
 	public String getImmatriculation() {
 		return immatriculation;

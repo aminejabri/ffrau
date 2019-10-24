@@ -14,6 +14,12 @@ public class Voiture  extends Vehicule{
 		this.puissance = puissance;
 	}
 	
+	public Voiture( String immatriculation, Constructeur con, float puissance) {
+		super(immatriculation,   con,   TypeVehicule.VOITURE);
+		this.puissance = puissance;
+	}
+	
+	
 	
 
 	public float getPuissance() {

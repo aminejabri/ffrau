@@ -14,6 +14,14 @@ public class Rallye {
 	
 	
 	
+	public List<EditionRallye> getLstEditions() {
+		return lstEditions;
+	}
+
+	public void setLstEditions(List<EditionRallye> lstEditions) {
+		this.lstEditions = lstEditions;
+	}
+
 	public Rallye() {
 		super();
 		// TODO Auto-generated constructor stub

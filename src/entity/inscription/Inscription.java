@@ -29,6 +29,15 @@ public class Inscription {
 		this.etat = etat;
 	}
 
+	public Inscription( Coureur coureur, Vehicule vehicule, EditionRallye editionRallye, EtatInscription etat) {
+		super();
+		this.numero = numero;
+		this.coureur = coureur;
+		this.vehicule = vehicule;
+		this.editionRallye = editionRallye;
+		this.etat = etat;
+	}
+
 	public Coureur getCoureur() {
 		return coureur;
 	}

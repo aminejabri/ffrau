@@ -14,6 +14,12 @@ public class Camion extends Vehicule {
 		super(  id,   immatriculation,   con, TypeVehicule.CAMION);
 		this.poid = poid;
 	}
+	
+	
+	public Camion( String immatriculation, Constructeur con, float poid) {
+		super(    immatriculation,   con, TypeVehicule.CAMION);
+		this.poid = poid;
+	}
 
 
 	public float getPoid() {

@@ -80,6 +80,43 @@ public class CoureurDao extends AbstractDao<Coureur>{
 			return null;
 		}
 	}
+
+	public Coureur findByUtilId(int id) {
+		PreparedStatement stm;
+		try {
+				stm = connection.prepareStatement("SELECT * FROM coureur where cour_uti_id = ?");
+				stm.setInt(1, id);   //? commence par 1
+				stm.execute();
+				ResultSet rs = stm.getResultSet();
+				
+				int idCour = 0;
+				String nom = "";
+				String prenom = "";
+				Date naissance = null;
+				String groupeSang = "";
+				String rhesus = "";
+				Utilisateur user= null;
+				while (rs.next()) {
+					
+					idCour = rs.getInt(1);
+					user = DaoFactory.getUtilisateurDao().find(rs.getInt(2));
+					nom = rs.getString(3);
+					prenom = rs.getString(4);
+					naissance = rs.getDate(5);
+					groupeSang = rs.getString(6);
+					rhesus = rs.getString(7);
+				}
+				
+				if (idCour != 0)
+					return new Coureur(idCour, user, nom, prenom, naissance, groupeSang, rhesus);
+				else
+					return null;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 	public List<Coureur> findByEditionId(int id) {
@@ -106,6 +143,30 @@ public class CoureurDao extends AbstractDao<Coureur>{
 			return null;
 		}
 	}
+
+	public Coureur save(Coureur obj) {
+		try {
+			PreparedStatement stm = connection.prepareStatement("insert into coureur (cour_uti_id,cour_nom,cour_prenom,cour_dtNais,cour_groupeSang,cour_rhesus) values(?,?,?,?,?,?);", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, obj.getUtilisateur().getId());
+			stm.setString(2, obj.getNom() );
+			stm.setString(3, obj.getPrenom() );
+			stm.setDate(4, new java.sql.Date(obj.getDtNais().getTime()));
+			stm.setString(5, obj.getGroupeSang() );
+			stm.setString(6, obj.getRhesus() );
+			stm.execute();
+			ResultSet rs = stm.getGeneratedKeys();
+			if(rs.next())
+				obj.setId(rs.getInt(1));
+			if (obj.getId() != 0) {
+				
+				return obj;
+			} else {
+				return null;
+			}
+			} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	}
 
 	
 }

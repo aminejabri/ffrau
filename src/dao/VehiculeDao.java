@@ -117,10 +117,10 @@ public class VehiculeDao extends AbstractDao<Vehicule>{
 				poid = rs.getFloat(6);
 				cylindre = rs.getFloat(7);
 			}
-			if(type == TypeVehicule.VOITURE.name()) {
+			if(TypeVehicule.VOITURE.name().equalsIgnoreCase(type) ) {
 				return new Voiture(id, immat, con, puissance);
 			}
-			else if(type == TypeVehicule.CAMION.name()) {
+			else if(TypeVehicule.CAMION.name().equalsIgnoreCase(type)) {
 				return new Camion(id, immat, con, poid);
 			}
 			else {
@@ -175,4 +175,43 @@ public class VehiculeDao extends AbstractDao<Vehicule>{
 			return null;
 		}
 	}
+	
+	public Vehicule save(Vehicule obj) throws SQLIntegrityConstraintViolationException {
+		try {
+			PreparedStatement stm = connection.prepareStatement("insert into vehicule(veh_const_id, veh_immatriculation, veh_type, veh_puissance, veh_poid, veh_cylindre) values(?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, obj.getConstructeur().getId());
+			stm.setString(2, obj.getImmatriculation());
+			stm.setString(3, obj.getType().name());
+			
+			if(obj instanceof Voiture) {
+				stm.setFloat(4, ((Voiture) obj).getPuissance());
+				stm.setString(5, null);
+				stm.setString(6, null);
+			}
+			else if(obj instanceof Camion) {
+				stm.setString(4, null);
+				stm.setFloat(5, ((Camion) obj).getPoid());
+				stm.setString(6, null);
+			}
+			else if(obj instanceof Moto) {
+				stm.setString(4, null);
+				stm.setString(5, null);
+				stm.setFloat(6, ((Moto) obj).getCylindree());
+			}
+			stm.execute();
+			ResultSet rs = stm.getGeneratedKeys();
+			if(rs.next())
+				obj.setId(rs.getInt(1));
+			if (obj.getId() != 0) {
+				return obj;
+			} else return null;
+			
+				
+			} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 }

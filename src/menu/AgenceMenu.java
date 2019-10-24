@@ -20,7 +20,7 @@ public static void menu() {
 	        	CreationEditionMenu.menu();
 	        	return;
 	        case 3:
-	        	AjouterConstructeurMenu.menu();
+	        	//AjouterConstructeurMenu.menu();
 	        	return;
 	        default:
 	            System.out.println("Veuillez choisir entre [1 , 2, 3] ");
