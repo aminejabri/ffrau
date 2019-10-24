@@ -160,10 +160,10 @@ public class VehiculeDao extends AbstractDao<Vehicule>{
 				poid = rs.getFloat(6);
 				cylindre = rs.getFloat(7);
 			}
-			if(type == TypeVehicule.VOITURE.name()) {
+			if(TypeVehicule.VOITURE.name().equalsIgnoreCase(type)) {
 				return new Voiture(id, immat, con, puissance);
 			}
-			else if(type == TypeVehicule.CAMION.name()) {
+			else if(TypeVehicule.CAMION.name().equalsIgnoreCase(type)) {
 				return new Camion(id, immat, con, poid);
 			}
 			else {

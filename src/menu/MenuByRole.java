@@ -13,7 +13,7 @@ public class MenuByRole {
 	}
 	
 	public static void commissaireMenu(){
-
+		CommissaireMenu.menu();
 	}
 	
 	public static void constructeurMenu(){
@@ -25,7 +25,7 @@ public class MenuByRole {
 	}
 	
 	public static void juryMenu(){
-		
+		//JuryMenu.menu();
 	}
 
 }
